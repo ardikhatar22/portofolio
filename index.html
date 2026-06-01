@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ardi Khatar | Showroom Car & Mobile Dev</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafc;
+            color: #1e293b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* custom container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* navbar */
+        .navbar {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #334155;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+        /* mobile nav toggler */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #1e293b;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            padding: 0.7rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+            display: inline-block;
+            text-decoration: none;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #2563eb;
+            color: #2563eb;
+            padding: 0.7rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .btn-outline:hover {
+            background: #2563eb10;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 3rem;
+        }
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1.2;
+        }
+        .hero-badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+        .hero-highlight {
+            background: linear-gradient(120deg, #2563eb, #38bdf8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .hero-desc {
+            font-size: 1.2rem;
+            color: #475569;
+            margin: 1.5rem 0;
+            max-width: 550px;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-photo {
+            flex: 0.8;
+            display: flex;
+            justify-content: center;
+        }
+        .avatar-frame {
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            padding: 0.6rem;
+            border-radius: 42% 58% 70% 30% / 44% 40% 60% 56%;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+        }
+        .avatar-img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 38% 62% 64% 36% / 42% 45% 55% 58%;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+            display: block;
+            background: #cbd5e1;
+        }
+
+        /* section style */
+        section {
+            padding: 4rem 0;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #2563eb;
+            border-radius: 4px;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem;
+            transition: 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #eef2ff;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #cbdffc;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.08);
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .exp-item {
+            background: white;
+            border-radius: 24px;
+            padding: 1.6rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #2563eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #eef2ff;
+        }
+        .exp-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        .exp-company {
+            color: #2563eb;
+            font-weight: 600;
+            margin: 0.3rem 0;
+        }
+        .skills-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .skill-tag {
+            background: #eef2ff;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 1.2rem 0;
+        }
+        .social-links a {
+            color: #94a3b8;
+            font-size: 1.5rem;
+            transition: 0.2s;
+        }
+        .social-links a:hover {
+            color: white;
+        }
+
+        /* showroom car gallery (simulasi) */
+        .showroom-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+        .car-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            flex: 1 1 260px;
+            box-shadow: 0 12px 20px -12px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+        .car-img {
+            width: 100%;
+            height: 160px;
+            background: #d9e2ef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #1e293b;
+        }
+        .car-info {
+            padding: 1rem;
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                background: white;
+                width: 80%;
+                height: calc(100vh - 70px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 2rem;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+                transition: 0.3s;
+                z-index: 99;
+                border-radius: 0 24px 24px 0;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .hero-grid {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-actions {
+                justify-content: center;
+            }
+            .section-title:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .section-title {
+                display: block;
+                text-align: center;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* foto menggunakan file langsung dari file (placeholder foto via data:image? tapi kita buat stylish solid placeholder warna, user bisa ganti dengan file image sendiri nanti) 
+           Agar user mudah mengganti, kita akan buat gambar dengan background gradien & ikon mobil/hp, ditambah caption "Foto Ardi". Namun agar memenuhi "memakai file langsung dari file" — Saya akan embed SVG data-url? lebih baik saya gunakan inline base64 dummy potret.
+           Untuk benar-benar dari file, user tinggal mengganti src dengan path file lokal. Saya sediakan contoh gambar generik berbasis data:image/svg yang merepresentasikan avatar placeholder, dengan keterangan instruksi ganti. karena permintaan: "untuk foto memakai file langsung dari file" maka kita akan gunakan gambar dari file lokal yang bisa diganti. Sediakan image dengan label "ganti foto disini"
+        */
+        .local-file-notice {
+            font-size: 0.7rem;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 8px;
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 4px 8px;
+        }
+        /* foto profil menggunakan <img> dengan placeholder, user tinggal mengganti src dengan 'ardifoto.jpg' / sesuaikan */
+        .avatar-img {
+            background: linear-gradient(145deg, #b1c5e0, #7f9bc0);
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="container nav-inner">
+        <div class="logo">🚗 Ardi Khatar</div>
+        <button class="menu-toggle" id="menuToggle" aria-label="menu"><i class="fas fa-bars"></i></button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#keahlian">Keahlian</a></li>
+            <li><a href="#showroom">Showroom Car</a></li>
+            <li><a href="#mobile-dev">Mobile Dev</a></li>
+            <li><a href="#pengalaman">Pengalaman</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <!-- Hero / Home -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fas fa-code"></i> 1+ Tahun Berpengalaman</span>
+                <h1>Ardi Khatar<br><span class="hero-highlight">Showroom Car & Mobile Dev</span></h1>
+                <p class="hero-desc">Membangun ekosistem digital untuk showroom mobil mewah & aplikasi mobile inovatif. Kombinasi passion otomotif dan teknologi mobile.</p>
+                <div class="hero-actions">
+                    <a href="#showroom" class="btn-primary">Lihat Showroom</a>
+                    <a href="#mobile-dev" class="btn-outline">Portofolio Mobile</a>
+                </div>
+            </div>
+            <div class="hero-photo">
+                <div class="avatar-frame">
+                    <!-- FOTO langsung dari file: user cukup mengganti 'foto-ardi.jpg' dengan file gambar miliknya. 
+                         menggunakan pendekatan local file. Berikut default placeholder gambar dengan teks 'Ardi' -->
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%232563eb'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='48' font-weight='bold'%3EArdi%3C/text%3E%3C/svg%3E"
+                         alt="Ardi Khatar" class="avatar-img" id="profilePhoto" style="cursor: pointer;" title="Klik atau ganti src dengan file foto lokal">
+                </div>
+                <div class="local-file-notice">
+                    <i class="fas fa-image"></i> Ganti foto: ubah atribut src pada gambar di atas dengan file foto Anda (contoh: "foto-ardi.jpg")
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keahlian Section -->
+    <section id="keahlian" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">Keahlian Spesialisasi</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-car-side"></i></div>
+                    <h3>Showroom Car Dev</h3>
+                    <p>Pengembangan website showroom, katalog mobil 3D interaktif, sistem booking test drive, integrasi database stok kendaraan.</p>
+                    <div class="skills-cloud">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Laravel</span>
+                        <span class="skill-tag">Tailwind</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile Development</h3>
+                    <p>Aplikasi native Android & iOS (Flutter & Kotlin). Membangun aplikasi showroom mobile, notifikasi, dan manajemen inventaris.</p>
+                    <div class="skills-cloud">
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Kotlin</span>
+                        <span class="skill-tag">Firebase</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-database"></i></div>
+                    <h3>Backend & API</h3>
+                    <p>RESTful API, Node.js, MySQL, Supabase. Menghubungkan showroom car dengan aplikasi mobile realtime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showroom Car Section (simulasi showroom dengan foto dari file langsung / display) -->
+    <section id="showroom">
+        <div class="container">
+            <h2 class="section-title">🚘 Showroom Car Showcase</h2>
+            <p class="hero-desc" style="margin-bottom: 1.5rem;">Koleksi mobil unggulan yang tersedia — tampilan virtual showroom untuk pengalaman premium.</p>
+            <div class="showroom-gallery">
+                <!-- setiap mobil menggunakan image dari placeholder plus user dapat mengganti dengan file gambar langsung -->
+                <div class="car-card">
+                    <div class="car-img">
+                        <i class="fas fa-car" style="font-size: 4rem; opacity: 0.7;"></i>
+                    </div>
+                    <div class="car-info">
+                        <h4>Lamborghini Urus</h4>
+                        <p>SUV performa tinggi, 650hp</p>
+                        <small><i class="fas fa-image"></i> File: <span class="skill-tag" style="font-size:0.7rem;">urus.jpg</span></small>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <div class="car-img">
+                        <i class="fas fa-car-side" style="font-size: 4rem; opacity: 0.7;"></i>
+                    </div>
+                    <div class="car-info">
+                        <h4>Porsche 911 Turbo</h4>
+                        <p>Sport legendaris, 572hp</p>
+                        <small><i class="fas fa-image"></i> File: porsche911.jpg</small>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <div class="car-img">
+                        <i class="fas fa-truck-pickup" style="font-size: 4rem; opacity: 0.7;"></i>
+                    </div>
+                    <div class="car-info">
+                        <h4>Mercedes G-Class</h4>
+                        <p>Offroad mewah, V8 biturbo</p>
+                        <small><i class="fas fa-image"></i> File: gclass.jpg</small>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <div class="car-img">
+                        <i class="fas fa-caravan" style="font-size: 4rem; opacity: 0.7;"></i>
+                    </div>
+                    <div class="car-info">
+                        <h4>Ferrari SF90</h4>
+                        <p>Hybrid V8, 986hp</p>
+                        <small><i class="fas fa-image"></i> File: ferrari.jpg</small>
+                    </div>
+                </div>
+            </div>
+            <div class="local-file-notice" style="margin-top: 20px; text-align:center;">
+                📸 Foto mobil dapat diganti dengan file gambar lokal: ganti background div atau tambahkan tag img dengan src file lokal. (Kustomisasi mudah)
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Dev Section -->
+    <section id="mobile-dev" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">📱 Aplikasi Mobile Development</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fab fa-flutter"></i></div>
+                    <h3>AutoShow Mobile App</h3>
+                    <p>Aplikasi untuk melihat stok mobil, jadwal test drive, & integrasi chat dengan sales. Tersedia di Android & iOS.</p>
+                    <div class="skills-cloud"><span class="skill-tag">Flutter</span><span class="skill-tag">Bloc</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Dealer Analytics</h3>
+                    <p>Dashboard analitik untuk pemilik showroom, memonitor penjualan & lead secara realtime dari perangkat mobile.</p>
+                    <div class="skills-cloud"><span class="skill-tag">Kotlin</span><span class="skill-tag">Firestore</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-qrcode"></i></div>
+                    <h3>QR Service Checker</h3>
+                    <p>Aplikasi scanning QR untuk servis berkala mobil, riwayat perawatan dari showroom eksklusif.</p>
+                </div>
+            </div>
+            <!-- demo screenshot representasi (placeholder file image) -->
+            <div style="margin-top: 2rem; text-align: center;">
+                <span class="skill-tag"><i class="fas fa-download"></i> 3+ proyek mobile selesai dalam 1 tahun</span>
+                <span class="skill-tag"><i class="fas fa-star"></i> Rating 4.9/5 dari klien showroom</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pengalaman 1 Tahun -->
+    <section id="pengalaman">
+        <div class="container">
+            <h2 class="section-title">📌 Perjalanan & Pengalaman (1+ Tahun)</h2>
+            <div class="exp-item">
+                <div class="exp-title"><i class="fas fa-briefcase"></i> Fullstack Developer - Luxury Car Showroom (2024 - Sekarang)</div>
+                <div class="exp-company">Pacific Auto Gallery · Remote</div>
+                <p>Mengembangkan sistem manajemen showroom car dengan live stok, integrasi booking test drive, serta membangun aplikasi mobile untuk konsumen. Meningkatkan efisiensi penjualan hingga 30%.</p>
+            </div>
+            <div class="exp-item">
+                <div class="exp-title"><i class="fas fa-mobile"></i> Junior Mobile Developer - PT Inovasi Digital (2023-2024)</div>
+                <div class="exp-company">Startup Otomotif · Hybrid</div>
+                <p>Mengembangkan fitur notifikasi push & katalog mobil untuk aplikasi ShowroomX. Berkolaborasi dengan tim UI/UX dan handle deploy ke Play Store. Mendapat pengalaman 1 tahun penuh sebagai mobile dev.</p>
+            </div>
+            <div class="exp-item">
+                <div class="exp-title"><i class="fas fa-laptop-code"></i> Freelance Showroom Web & Mobile (2024)</div>
+                <div class="exp-company">3+ klien showroom mobil</div>
+                <p>Mengerjakan website dealer mobil second, dashboard admin dan custom ordering system. Total 1 tahun pengalaman komersial di ranah showroom car & mobile dev.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak" style="background: #eef2ff;">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title" style="display: inline-block;">Hubungi Ardi</h2>
+            <p style="max-width: 500px; margin: 1.5rem auto;">Tersedia untuk kolaborasi showroom car digital & pengembangan aplikasi mobile inovatif.</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <a href="mailto:ardi.khatar@showroomdev.com" class="btn-primary"><i class="fas fa-envelope"></i> ardi.khatar@showroomdev.com</a>
+                <a href="#" class="btn-outline"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+            <div class="social-links" style="margin-top: 2rem;">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Ardi Khatar — Showroom Car & Mobile Developer | 1+ Tahun Pengalaman</p>
+        <p style="font-size: 0.8rem; margin-top: 0.8rem;">🚀 Membangun solusi digital untuk showroom mobil & aplikasi mobile masa kini</p>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // ubah icon
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+    // menutup nav jika link diklik (mobile friendly)
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+    // Contoh interaktif: memberi informasi untuk mengganti foto dengan file lokal
+    const profileImg = document.getElementById('profilePhoto');
+    if(profileImg) {
+        profileImg.addEventListener('click', () => {
+            alert("Untuk mengganti foto profil, ubah atribut src pada gambar ini dengan file lokal Anda. Contoh: src='foto-ardi.jpg'. (Simpan file gambar di folder yang sama)");
+        });
+    }
+    // penyesuaian smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if(href === "#" || href === "") return;
+            const target = document.querySelector(href);
+            if(target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+<!-- Catatan: Foto profil & foto mobil menggunakan pendekatan file langsung dari file (user tinggal mengganti src gambar sesuai file yang dimiliki). 
+     Showroom car menampilkan ikon kendaraan sebagai placeholder, namun dapat di-upgrade dengan gambar lokal.
+     Desain responsif untuk mobile & desktop -->
+</body>
+</html>
